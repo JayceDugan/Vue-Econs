@@ -1,19 +1,20 @@
 import { MapObjectInterface } from '@/types';
 import { defineAsyncComponent } from 'vue';
+import econMapComponents from '@/lib/econMapList.json';
 
-const map: MapObjectInterface = {
-  list: {
-    'ec-address': 'Address.vue',
-  },
+const econMap: MapObjectInterface = {
+  components: econMapComponents,
   get keys(): Array<string> {
-    return Object.keys(this.list);
+    return Object.keys(this.components);
   },
 };
 
 // eslint-disable-next-line
-const econMapLoader = map.keys.reduce((acc: Record<string, any>, key: string) => ({
+const econMapBuilder = (acc: Record<string, any>, key: string) => ({
   ...acc,
-  [key]: defineAsyncComponent(() => import(`@/components/icons/${map.list[key]}`)),
-}), {});
+  [key]: defineAsyncComponent(() => import(`@/components/icons/${econMap.components[key]}`)),
+});
+
+const econMapLoader = econMap.keys.reduce(econMapBuilder, {});
 
 export default econMapLoader;
