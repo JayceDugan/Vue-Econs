@@ -1,0 +1,1 @@
+export { MapObjectInterface } from './MapObject';
