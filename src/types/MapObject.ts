@@ -3,6 +3,6 @@ interface ListObject {
 }
 
 export interface MapObjectInterface {
-  list: ListObject;
+  components: ListObject;
   keys: Array<string>;
 }
